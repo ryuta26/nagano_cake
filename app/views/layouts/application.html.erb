@@ -10,6 +10,50 @@
   </head>
 
   <body>
+        <header>
+          <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class ="container">
+              <div class="navbar-header">
+                <h3>naganocake</h3>
+              </div>
+              <div class="row">
+            <div class= "slidemenu">
+              <ul class="nav navbar-nav navbar-right">
+              <% if end_user_signed_in? %>
+              <li>
+                <p class="navtext">マイページ</p>
+              </li>
+              <li>
+                <p class="navtext">カート一覧</p>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
+              </li>
+              <% elsif admin_signed_in? %>
+
+              <li>
+                <p class="navtext">受注一覧</p>
+              </li>
+              <li>
+                <p class="navtext">商品登録</p>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+              </li>
+              <% else %>
+                <li>
+                  <%= link_to "sign_up", new_end_user_registration_path %>
+                </li>
+                <li>
+                  <%= link_to "log_in", new_end_user_session_path %>
+                </li>
+              </ul>
+              <% end %>
+            </div>
+          </nav>
+        </header>
     <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

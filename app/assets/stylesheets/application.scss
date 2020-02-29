@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+
+	@import "bootstrap-sprockets";  
+    @import "bootstrap";
+
+    body { padding-top: 70px; }
+
+
+    .navbar-header {
+    color: white;
+    }
+
+.main {
+	margin-top: 100px;
+}
+
+.text {
+	background-color: lightgray;
+	width: 30%;
+	text-align: center;
+}
+
+.text2 {
+	margin-top: 50px;
+	width: 20%;
+	text-align: center;
+	background-color: lightgray;
+}
+
+.actions2 {
+	padding-left: 30%;
+}
+
+
+.form-control {
+	margin-top: 10px;
+}
+
+.navtext {
+	color: white;
+	margin-top: 15px;
+}
+
+.navtext:nth-child(1) {
+  margin-right: 5px;
+}
