@@ -1,2 +1,60 @@
-<h1>EndUser#show</h1>
-<p>Find me in app/views/end_user/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6">
+			<h4>マイページ</h4>
+			<h4>登録情報
+				<%= link_to edit_public_end_user_path do %>
+					<button type="button" class="btn btn-primary">編集する</button>
+				<% end %>
+				<%= link_to  do %>
+					<button type="button" class="btn btn-primary">パスワードを変更する</button>
+				<% end %>
+				<%= link_to "退会する", public_end_user_path(@end_user), method: :delete, class: "btn  btn-danger	","data-confirm" => "本当に退会しますか？" %>
+			</h4>
+			<table border="1">
+				<tr>
+					<th>氏名</th>
+					<td>
+						<%= @end_user.last_name %>
+						<%= @end_user.first_name %>
+					</td>
+				</tr>
+				<tr>
+					<th>カナ</th>
+					<td>
+						<%= @end_user.last_kana %>
+						<%= @end_user.first_kana %>&nbsp&nbsp&nbsp
+					</td>
+				</tr>
+				<tr>
+					<th>郵便番号</th>
+					<td>
+						<%= @end_user.postal_code %>
+					</td>
+				</tr>
+				<tr>
+					<th>住所</th>
+					<td>
+						<%= @end_user.domicile %>
+					</td>
+				</tr>
+				<tr>
+					<th>メールアドレス &nbsp&nbsp&nbsp</th>
+					<td>
+						<%= @end_user.email %>
+					</td>
+				</tr>
+			</table>
+			<h4>配送先
+				<%= link_to  do %>
+					<button type="button" class="btn btn-primary">一覧を見る</button>
+				<% end %>
+			</h4>
+			<h4>注文履歴
+				<%= link_to  do %>
+					<button type="button" class="btn btn-primary">一覧を見る</button>
+				<% end %>
+			</h4>
+		</div>
+	</div>
+</div>

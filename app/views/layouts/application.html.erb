@@ -21,7 +21,7 @@
               <ul class="nav navbar-nav navbar-right">
               <% if end_user_signed_in? %>
               <li>
-                <p class="navtext">マイページ</p>
+                <%= link_to "マイページ", public_end_user_path(current_end_user) %>
               </li>
               <li>
                 <p class="navtext">カート一覧</p>
