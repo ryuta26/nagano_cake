@@ -35,7 +35,7 @@
                 <p class="navtext">受注一覧</p>
               </li>
               <li>
-                <p class="navtext">商品登録</p>
+                <%= link_to "商品登録", new_admin_item_path(current_end_user) %>
               </li>
               <li>
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
