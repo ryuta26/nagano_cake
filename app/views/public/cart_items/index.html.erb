@@ -1,0 +1,49 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-11">
+			<h4>ショッピングカート</h4>
+			<%= link_to "カートを削除する", public_destroy_cart_items_path, method: :delete, class: "btn  btn-danger	","data-confirm" => "本当に削除しますか？" %>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>商品名</th>
+						<th>単価（税込み）</th>
+						<th>数量</th>
+						<th>小計</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @cart_items.each do |cart_item| %>
+					<tr>
+						<td><%= attachment_image_tag cart_item.item, :image, size:'80x60' %><%= cart_item.item.name %></td>
+						<td><%= (cart_item.item.price * 1.1).round %></td>
+						<td><%= form_for(cart_item, url: public_cart_item_path(cart_item)) do |f| %>
+							<%= f.text_field :amount %>
+							<%= f.submit "変更",class: 'btn btn-primary' %>
+							<% end %>
+						</td>
+						<td><%= (cart_item.item.price * 1.1).round * cart_item.amount %>
+						</td>
+						<td><%= link_to "削除する", public_cart_item_path(cart_item), method: :delete, class: "btn  btn-danger	","data-confirm" => "本当に削除しますか？" %></td>
+					</tr>
+					<td>
+					<% end %>
+				</tbody>
+			</table>
+			<table>
+				<tr>
+					<th>合計金額</th>
+					<td><%= (@total_price * 1.1).round %></td>
+
+				</tr>
+			</table>
+			<%= link_to public_items_path do %>
+					<button type="button" class="btn btn-primary">買い物を続ける</button>
+				<% end %>
+				<%= link_to  do %>
+					<button type="button" class="btn btn-primary">情報入力に進む</button>
+				<% end %>
+		</div>
+	</div>
+</div>

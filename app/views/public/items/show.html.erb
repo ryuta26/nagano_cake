@@ -1,0 +1,43 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<table>
+				<thead>
+					<th>ジャンル検索</th>
+				</thead>
+				<tbody>
+					<tr>
+					<td><a href="/public/items?genre_id=1">ケーキ</a></td>
+				</tr>
+				<tr>
+					<td><a href="/public/items?genre_id=2">焼き菓子</a></td>
+				</tr>
+				<tr>
+					<td><a href="/public/items?genre_id=3">プリン</a></td>
+				</tr>
+				<tr>
+					<td><a href="/public/items?genre_id=4">キャンディ</a></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-9">
+			<div class="col-xs-6">
+				<%= attachment_image_tag @item,:image, format: 'jpeg', class: "image", size:'400x300'%>
+			</div>
+			<div class="col-xs-6">
+				<h4><%= @item.name %></h4>
+				<span><%= @item.introduction %></span>
+				<h5>￥<%= (@item.price * 1.1).round %>(税込)</h5>
+				<div>
+					<%= form_for(@cart_item, url:public_cart_items_path) do |f| %>
+			        <%= f.hidden_field :item_id, value: @item.id %>
+			        <%= f.hidden_field :end_user_id, value: current_end_user.id %>
+			        <%= f.select :amount, options_for_select((1..50).to_a), include_blank: "個数選択" %>
+			        <%= f.submit "カートに入れる" %>
+			      <% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
