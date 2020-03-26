@@ -32,7 +32,7 @@
               <% elsif admin_signed_in? %>
 
               <li>
-                <p class="navtext">受注一覧</p>
+                <%= link_to "受注一覧", admin_orders_path %>
               </li>
               <li>
                 <%= link_to "商品登録", new_admin_item_path(current_end_user) %>

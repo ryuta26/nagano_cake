@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="row">
+		<h4>注文情報確認</h4>
+		<div class="col-xs-5">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>商品名</th>
+						<th>単価（税込み）</th>
+						<th>数量</th>
+						<th>小計</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<% @cart_items.each do |cart_item| %>
+					<tr>
+						<td><%= attachment_image_tag cart_item.item, :image, size:'80x60' %><%= cart_item.item.name %></td>
+						<td><%= (cart_item.item.price * 1.1).round %></td>
+						<td><%= cart_item.amount %>
+						</td>
+						<td><%= (cart_item.item.price * 1.1).round * cart_item.amount %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<div>
+				<h5>支払い方法</h5>
+				<%= @order.payment_method %>
+			</div>
+			<div>
+				<h5>お届け先</h5>
+				〒<%= @order.postal_code %>
+				<%= @order.domicile %>
+				<%= @order.name %>
+			</div>
+			
+			<%= link_to "購入を確定する",public_end_user_order_thanks_path(current_end_user, @order) %>
+		</div>
+		
+		<div class="col-xs-5">
+			<table border= "1" %>
+				<tr>
+					<th>送料</th>
+					<td><%= @order.freight_fee %></td>
+				</tr>
+				<tr>
+					<th>商品合計</th>
+					<td><%= (@total_price * 1.1).round %></td>
+				</tr>
+				<tr>
+					<th>請求額合計</th>
+					<td><%= @order.total_due %></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

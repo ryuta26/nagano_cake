@@ -1,0 +1,77 @@
+<div class="container">
+	<div class="row">
+		<h4>注文詳細画面</h4>
+		<div class="col-xs-4">
+			<table>
+				<tr>
+					<th>購入者</th>
+					<td>
+						<%= @end_user.fullname %>
+					</td>
+				</tr>
+				<tr>
+					<th>配送先</th>
+					<td><%= @order.postal_code %>
+						<%= @order.domicile %>
+						<%= @order.name %>
+					</td>
+				</tr>
+				<tr>
+					<th>支払方法</th>
+					<td><%= @order.payment_method %></td>
+				</tr>
+				<tr>
+					<th>注文ステータス</th>
+					<td><%= form_for(@order, url: admin_order_path(@order)) do |f| %>
+						<%= f.select :order_stauts, ["入金待ち","入金確認","制作中","発送準備中","発送済み"] %>
+						<%= f.submit "更新" %>
+						<% end %>
+					</td>
+				</tr>
+			</table>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>商品名</th>
+						<th>単価(税込)</th>
+						<th>数量</th>
+						<th>小計</th>
+						<th>制作ステータス</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @order.order_details.each do |order_detail| %>
+					<tr>
+						<td><%= order_detail.item.name %></td>
+						<td><%= (order_detail.item.price * 1.1).round %></td>
+						<td><%= order_detail.amount %></td>
+						<td><%= (order_detail.item.price * 1.1).round * order_detail.amount %></td>
+						<td>
+							<%= form_for(order_detail, url:admin_order_detail_path(order_detail)) do |o| %>
+							<%= o.select :productin_status, ["着手不可","制作待ち","制作中","制作完了"] %>
+							<%= o.submit "更新" %>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-4">
+			<table>
+				<tr>
+					<th>商品合計</th>
+					<td><%= (@total_price * 1.1).round %>円</td>
+				</tr>
+				<tr>
+					<th>送料</th>
+					<td><%= @order.freight_fee %>円</td>
+				</tr>
+				<tr>
+					<th>請求金額合計</th>
+					<td><%= (@total_price * 1.1).round + @order.freight_fee %>円</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

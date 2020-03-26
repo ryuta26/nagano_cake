@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_05_103517) do
+ActiveRecord::Schema.define(version: 2020_03_22_091056) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.string "postal_code", null: false
+    t.string "domicile", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -70,6 +79,31 @@ ActiveRecord::Schema.define(version: 2020_03_05_103517) do
     t.integer "sale_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "order_id", default: 0, null: false
+    t.integer "item_id", default: 0, null: false
+    t.integer "amount", default: 0, null: false
+    t.integer "purchase_price", default: 0, null: false
+    t.integer "productin_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.string "postal_code", null: false
+    t.string "domicile", null: false
+    t.string "name", null: false
+    t.integer "payment_method", null: false
+    t.integer "freight_fee", default: 800, null: false
+    t.integer "total_due", null: false
+    t.integer "order_stauts", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "address_status"
+    t.integer "confirm_status", default: 0, null: false
   end
 
 end

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'orders/show'
+    get 'orders/index'
+  end
   devise_for :admins, controllers: {
   sessions:      'admins/sessions',
   passwords:     'admins/passwords',
@@ -9,12 +13,19 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :items, only: [:index, :new, :create]
     resources :end_users, only: [:index]
+    resources :orders, only: [:index, :show, :update]
+    resources :order_details, only: [:update]
   end
 
 
   namespace :public do
     resources :end_users, only: [:show, :edit, :update, :destroy] do
       resources :cart_items, only: [:index]
+      resources :orders, only: [:new, :create, :update]
+      get "orders/:id/confirm", to: "orders#confirm", as: "order_confirm"
+      get "orders/:id/thanks", to: "orders#thanks", as: "order_thanks"
+      resources :addresses, only: [:create]
+      resources :order_details, only: [:create]
     end
     resources :items, only: [:index, :show], param: :id
     resources :cart_items, only: [:create, :destroy, :update]
