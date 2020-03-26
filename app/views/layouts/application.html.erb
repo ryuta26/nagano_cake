@@ -29,6 +29,9 @@
               <li>
                 <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
               </li>
+              <%= form_tag(public_items_path, method: :get, enforce_utf8: false) do %>
+                <%= autocomplete_field_tag 'item[name]', nil,  autocomplete_item_name_public_items_path %>
+              <% end %>
               <% elsif admin_signed_in? %>
 
               <li>
@@ -51,6 +54,8 @@
               <% end %>
             </div>
           </nav>
+          <div>
+          </div>
         </header>
     <%= yield %>
       </div>

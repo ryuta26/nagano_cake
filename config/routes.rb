@@ -27,7 +27,9 @@ Rails.application.routes.draw do
       resources :addresses, only: [:create]
       resources :order_details, only: [:create]
     end
-    resources :items, only: [:index, :show], param: :id
+    resources :items, only: [:index, :show], param: :id do
+      get :autocomplete_item_name, on: :collection
+    end
     resources :cart_items, only: [:create, :destroy, :update]
  delete "public/cart_items", to: "cart_items#destroy_all", as: "destroy_cart_items"
 end

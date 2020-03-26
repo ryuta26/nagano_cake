@@ -7,6 +7,12 @@ class Public::ItemsController < ApplicationController
 	      @items = Item.all
 
 		end
+		if params[:item] && params[:item][:name]
+		    item_name = params[:item][:name]
+		    @items = Item.where("name LIKE '%#{item_name}%'")
+		  else
+		    @items = Item.all
+		  end
 		@url = request.fullpath
 	end
 	def show
